@@ -30,11 +30,16 @@ export default class Db {
     return Promise.resolve(images)
   }
   saveUser (user) {
-    return Promise.resolve(fixtures.getUser())
+    let userNew = fixture.getUser()
+    delete userNew.password
+    delete userNew.email
+    return Promise.resolve(userNew)
   }
   getUser (userName) {
-    return Promise.resolve(fixtures.getUser())
+    return Promise.resolve(fixture.getUser())
   }
-  authenticate (username, pass) { }
+  authenticate (username, pass) {
+    return Promise.resolve(true)
+  }
   getImageByUser (userId) {}
 }

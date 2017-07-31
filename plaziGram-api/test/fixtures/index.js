@@ -21,16 +21,15 @@ const fixtures = {
     }
     return images
   },
-   getUser () {
+  getUser () {
     return {
       name: 'wally c',
       id: 'f62db90-d6bf-46f00-9fb1-eb6912cb',
-      username: 'wally'
+      username: 'wally',
       password: '1234',
       email: 'wal@platzi.com',
       createdAt: 'Mon Jul 31 2017 00:57:02 GMT-0300 (Argentina Standard Time)'
     }
   }
 }
-
 export default fixtures
