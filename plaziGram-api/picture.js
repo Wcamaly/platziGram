@@ -5,7 +5,7 @@ import HttpHash from 'http-hash'
 import Db from 'platzigram-db'
 import DbSub from './test/stub/db'
 import config from './config'
-import utils from './lib/uils'
+import utils from './lib/utils'
 
 const env = process.env.NODE_ENV || 'production'
 const hash = HttpHash()
@@ -36,10 +36,11 @@ hash.set('GET /:id', async function getPicture (req, res, params) {
 hash.set('POST /', async function postPictures (req, res, params) {
   let image = await json(req)
   try {
-    let token = await utils.extracToken(req)
-    await utils.verifyToken(token, config.token)
+    let token = await utils.extractToken(req)
+    let encode = await utils.verifyToken(token, config.secret)
+    if (encode && encode.userID != image.userId)
   } catch (e) {
-    return send(res, 401, { error: 'invalid token' })
+    return send(res, 401, { error: 'Invalid token' })
   }
   await db.connect()
   let created = await db.saveImage(image)

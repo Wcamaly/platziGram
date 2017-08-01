@@ -53,23 +53,24 @@ test('GET /:username', async t => {
 /**
  * Testing authenticate
  */
-test('POST /authenticate', async t => {
-  let user = fixture.getUser()
-  let url = t.context.url
+test.todo('POST /authenticate')
+// , async t => {
+//   let user = fixture.getUser()
+//   let url = t.context.url
 
-  let options = {
-    method: 'POST',
-    url: `${url}/authenticate`,
-    json: true,
-    body: {
-      username: user.username,
-      pasword: user.password
-    }
-  }
-  let body = await request(options)
+//   let options = {
+//     method: 'POST',
+//     url: `${url}/authenticate`,
+//     json: true,
+//     body: {
+//       username: user.username,
+//       pasword: user.password
+//     }
+//   }
+//   let body = await request(options)
 
-  t.true(body)
-})
+//   t.true(body)
+// }
 /**
  * Testing getImageByUser
  */

@@ -46,10 +46,6 @@ test('no token POST /', async t => {
     resolveWithFullResponse: true
   }
   t.throws(request(options), /Invalid token/)
-
-  // let response = await request(options)
-  // t.is(response.statusCode, 201)
-  // t.deepEqual(response.body, image)
 })
 /**
  * Testing Secure ADD Image POST /:id
@@ -77,6 +73,31 @@ test('secure POST /', async t => {
   let response = await request(options)
   t.is(response.statusCode, 201)
   t.deepEqual(response.body, image)
+})
+/**
+ * Testing Secure ADD Image POST /:id
+ */
+test('invalid Token POST /', async t => {
+  let image = fixture.getImage()
+  let url = t.context.url
+  let token = await utils.signToken({ userId: 'hacky' }, config.secret)
+  console.log(token)
+
+  let options = {
+    method: 'POST',
+    url: url,
+    json: true,
+    body: {
+      description: image.description,
+      src: image.src,
+      userId: image.userId
+    },
+    headers: {
+      'Authorization': `Bearer ${token}`
+    },
+    resolveWithFullResponse: true
+  }
+  t.throws(request(options), /Invalid token/)
 })
 /**
  * Testing Plus like to Image POST /:id
