@@ -31,12 +31,11 @@ export default class Db {
   }
   saveUser (user) {
     let userNew = fixture.getUser()
-    delete userNew.password
-    delete userNew.email
     return Promise.resolve(userNew)
   }
   getUser (userName) {
-    return Promise.resolve(fixture.getUser())
+    let user = fixture.getUser()
+    return Promise.resolve(user)
   }
   authenticate (username, pass) {
     return Promise.resolve(true)

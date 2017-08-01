@@ -21,10 +21,14 @@ if (env === 'test') {
  * @param  {OBJ} params  Paramans in URl
  */
 hash.set('POST /', async function postPictures (req, res, params) {
-  let user = await json(params)
+  let user = await json(req)
   await db.connect()
   let result = await db.saveUser(user)
   await db.disconect()
+
+  delete result.password
+  delete result.email
+
   send(res, 201, result)
 })
 
@@ -37,16 +41,16 @@ hash.set('POST /', async function postPictures (req, res, params) {
 hash.set('GET /:username', async function getPicture (req, res, params) {
   let username = params.username
   await db.connect()
-  let user = await db.getUser(username)
+  let result = await db.getUser(username)
   await db.disconect()
-  send(res, 200, user)
+  send(res, 200, result)
 })
 /**
  * @param  {OBJ} req     Request to petion
  * @param  {OBJ} res     Response petion
  * @param  {OBJ} params  Paramans in URl
  */
-hash.set('POST /:id/like', async function postPictures (req, res, params) {
+hash.set('POST /authenticate', async function postPictures (req, res, params) {
 })
 /**
  * Post List image
